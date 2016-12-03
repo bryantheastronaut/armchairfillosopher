@@ -1,10 +1,11 @@
 import Twitter from 'node-twitter-api'
 import secrets from './secrets'
 
-module.exports = {
-  const twitter = new Twitter({
-    consumerKey: secrets.consumerKey,
-    consumerSecret: secrets.consumerSecret,
-    callback: secrets.callbackURL
-  })
-}
+export const twitter = new Twitter({
+  consumerKey: secrets.consumerKey,
+  consumerSecret: secrets.consumerSecret,
+  access_token_key: '',
+  access_token_secret: '',
+  callback: secrets.callbackURL,
+  data: {}
+})
