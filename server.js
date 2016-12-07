@@ -43,19 +43,16 @@ app.get('/twitter/callback', function(req, res) {
 })
 
 app.get('/timeline', function(req,res) {
-  twitter.verifyCredentials(twitter.access_token_key, twitter.access_token_secret, {}, function(err, data, res) {
+  let key = twitter.access_token_key
+  let secret = twitter.access_token_secret
+  twitter.verifyCredentials(key, secret, {}, function(err, data, resp) {
     if (err) console.log(`Something terrible happened with the access token stuff specifically: ${ JSON.stringify(err) }`)
     else {
-      twitter.getTimeline('home', { limit: 20 }, twitter.access_token_key, twitter.access_token_secret, function(err, data, res) {
-        if (err) throw err
-        let p = new Promise((res, rej) => {
-          twitter.data = data
-        })
+      twitter.getTimeline('home', { limit: 20 }, key, secret, function(err, data, response) {
+        res.json({ userTimeline: data})
       })
     }
   })
-  res.json({ timeline: 'hi' })
-  console.log(twitter.data)
 })
 
 app.listen(PORT, () => console.log(`App running on port ${ PORT }`))
