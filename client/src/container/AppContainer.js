@@ -5,27 +5,33 @@ class AppContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: {},
+      data: {msg: 'super secret potato'},
       error: null,
-      loading: false
+      loading: false,
+      isLoggedIn: false
     }
-    this.getTimeline = this.getTimeline.bind(this)
   }
-  getTimeline() {
+  getTimeline(timeline) {
     axios
-      .get('http://localhost:8181/auth')
-      .then(data => {
-        console.log('fuck this shit its all borken')
-      })
-      .catch((err) => {
-        if (err) throw err
-      })
+      .get('http://localhost:8181/timeline.json')
+      .then(data => this.setState({
+        data: data
+      }))
   }
+
   render() {
+    let propsWithChildren = React.Children.map(this.props.children, child => {
+      if (child.type.name === 'Timeline')
+        return React.cloneElement(child, {
+          data: this.state.data,
+          onGetTimeline: this.getTimeline
+        })
+      else return child
+    })
     return (
       <div>
         <a href='http://localhost:8181/auth'>log in with twitter</a>
-        <button onClick={ this.getTimeline }>Click me to get shit</button>
+        { propsWithChildren }
       </div>
     )
   }
