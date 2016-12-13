@@ -1,11 +1,22 @@
-import React from 'react'
-import cookie from 'react-cookie'
+import React, { Component } from 'react'
 
-const Timeline = (props) => {
-  console.log(cookie.load('loggedIn'))
-  return (
-    <h2>DIS DA TIMELINE</h2>
-  )
+class Timeline extends Component {
+  constructor(props) {
+    super(props)
+  }
+  getData(e) {
+    e.preventDefault()
+    this.onGetTimeline();
+    
+  }
+  render() {
+    return (
+      <div> TEssting thetimeline
+        <h2>{ JSON.stringify(this.props.data) }</h2>
+        <p></p>
+      </div>
+    )
+  }
 }
 
 export default Timeline

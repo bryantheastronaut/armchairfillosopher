@@ -5,18 +5,23 @@ class AppContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: {msg: 'super secret potato'},
+      data: [],
       error: null,
       loading: false,
       isLoggedIn: false
     }
+    this.getTimeline = this.getTimeline.bind(this);
   }
   getTimeline(timeline) {
+    this.setState({ loading: true })
     axios
       .get('http://localhost:8181/timeline.json')
-      .then(data => this.setState({
-        data: data
-      }))
+      .then(data => {
+        console.log(data)
+        this.setState({
+          data: data
+        })
+      })
   }
 
   render() {
@@ -24,7 +29,7 @@ class AppContainer extends Component {
       if (child.type.name === 'Timeline')
         return React.cloneElement(child, {
           data: this.state.data,
-          onGetTimeline: this.getTimeline
+          onGetTimeline: this.getTimeline()
         })
       else return child
     })
