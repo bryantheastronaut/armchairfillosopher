@@ -1,12 +1,14 @@
-import React from 'react'
-import { app } from '../styles/App.style'
+import React from 'react';
+import { Header } from './Header';
+import { app } from '../styles/App.style';
 
-const App = (props) => {
+const App = props => {
   return (
-    <div style={ app }>
-      <h1>Test</h1>
+    <div>
+      <Header />
+      <div style={ app }>test</div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
