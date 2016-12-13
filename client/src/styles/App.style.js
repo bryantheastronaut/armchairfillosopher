@@ -1,7 +1,8 @@
 module.exports = {
   app: {
     height: '100vh',
-    backgroundColor: 'red',
-    padding: '0.75rem'
+    backgroundColor: '#fafafa',
+    padding: '0.75rem',
+    color: '#222'
   }
 }
