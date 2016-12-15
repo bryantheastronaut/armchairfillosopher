@@ -6,7 +6,7 @@ const App = props => {
   return (
     <div>
       <Header />
-      <div style={ app }>test</div>
+      { props.children }
     </div>
   );
 };
